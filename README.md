@@ -3,6 +3,9 @@ A Python implementation of 2048 using the graphical user interface [tkinter](htt
 
 2048 is a single-player sliding tile puzzle video game written by Italian web developer Gabriele Cirulli where the objective is to slide numbered tiles on a grid to combine them to create a tile with the number 2048.
 
+
+![screenshot](img/game.png)
+
 ## Game Rules
 1. 2048 is played on a plain 4×4 grid, with numbered tiles that slide when a player moves them using the four arrow keys.
 2. Every turn, a new tile randomly appears in an empty spot on the board with a value of either 2 or 4.
