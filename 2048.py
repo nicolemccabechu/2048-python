@@ -45,4 +45,30 @@ class Game(tk.Frame):
         self.score_label.grid(row=1)
 
 
+    def start_game(self):
+        self.matrix = [[0] * 4 for _ in range(4)]
+
+        row = random.randint(0, 3)
+        col = random.randint(0, 3)
+        self.matrix[row][col] = 2
+        self.cells[row][col]["frame"].configure(bg=c.CELL_COLORS[2])
+        self.cells[row][col]["number"].configure(
+            bg=c.CELL_COLORS[2],
+            fg=c.CELL_NUMBER_COLORS[2],
+            font=c.CELL_NUMBER_FONTS[2],
+            text="2")
+        while(self.matrix[row][col] != 0):
+            row = random.randint(0, 3)
+            col = random.randint(0, 3)
+        self.matrix[row][col] = 2
+        self.cells[row][col]["frame"].configure(bg=c.CELL_COLORS[2])
+        self.cells[row][col]["number"].configure(
+            bg=c.CELL_COLORS[2],
+            fg=c.CELL_NUMBER_COLORS[2],
+            font=c.CELL_NUMBER_FONTS[2],
+            text="2")
+
+        self.score = 0
+
+
     
