@@ -129,3 +129,46 @@ class Game(tk.Frame):
                         text=str(cell_value))
         self.score_label.configure(text=self.score)
         self.update_idletasks()
+
+    def left(self, event):
+        self.stack()
+        self.combine()
+        self.stack()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
+
+
+    def right(self, event):
+        self.reverse()
+        self.stack()
+        self.combine()
+        self.stack()
+        self.reverse()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
+
+
+    def up(self, event):
+        self.transpose()
+        self.stack()
+        self.combine()
+        self.stack()
+        self.transpose()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
+
+
+    def down(self, event):
+        self.transpose()
+        self.reverse()
+        self.stack()
+        self.combine()
+        self.stack()
+        self.reverse()
+        self.transpose()
+        self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
