@@ -13,9 +13,14 @@ class Game(tk.Frame):
             self, bg=c.GRID_COLOR, bd=3, width=400, height=400)
         self.main_grid.grid(pady=(80, 0))
         self.make_GUI()
+        self.start_game()
+
+        self.master.bind("<Left>", self.left)
+        self.master.bind("<Right>", self.right)
+        self.master.bind("<Up>", self.up)
+        self.master.bind("<Down>", self.down)
 
         self.mainloop()
-
 
     def make_GUI(self):
         self.cells = []
@@ -47,7 +52,6 @@ class Game(tk.Frame):
 
     def start_game(self):
         self.matrix = [[0] * 4 for _ in range(4)]
-
         row = random.randint(0, 3)
         col = random.randint(0, 3)
         self.matrix[row][col] = 2
@@ -138,7 +142,6 @@ class Game(tk.Frame):
         self.update_GUI()
         self.game_over()
 
-
     def right(self, event):
         self.reverse()
         self.stack()
@@ -149,7 +152,6 @@ class Game(tk.Frame):
         self.update_GUI()
         self.game_over()
 
-
     def up(self, event):
         self.transpose()
         self.stack()
@@ -159,7 +161,6 @@ class Game(tk.Frame):
         self.add_new_tile()
         self.update_GUI()
         self.game_over()
-
 
     def down(self, event):
         self.transpose()
@@ -187,3 +188,29 @@ class Game(tk.Frame):
                 if self.matrix[i][j] == self.matrix[i + 1][j]:
                     return True
         return False
+
+    def game_over(self):
+        if any(2048 in row for row in self.matrix):
+            game_over_frame = tk.Frame(self.main_grid, borderwidth=2)
+            game_over_frame.place(relx=0.5, rely=0.5, anchor="center")
+            tk.Label(
+                game_over_frame,
+                text="You win!",
+                bg=c.WINNER_BG,
+                fg=c.GAME_OVER_FONT_COLOR,
+                font=c.GAME_OVER_FONT).pack()
+        elif not any(0 in row for row in self.matrix) and not self.horizontal_move_exists() and not self.vertical_move_exists():
+            game_over_frame = tk.Frame(self.main_grid, borderwidth=2)
+            game_over_frame.place(relx=0.5, rely=0.5, anchor="center")
+            tk.Label(
+                game_over_frame,
+                text="Game over!",
+                bg=c.LOSER_BG,
+                fg=c.GAME_OVER_FONT_COLOR,
+                font=c.GAME_OVER_FONT).pack()
+
+def main():
+    Game()
+
+if __name__ == "__main__":
+    main()
